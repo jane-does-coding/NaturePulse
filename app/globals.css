@@ -3,19 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #ffffff;
+	--foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+	color: var(--foreground);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+	font-family: "Dirtyline36Daysoftype2022";
+	src: url("/fonts/Dirtyline 36daysoftype 2022.eot"); /* IE9 Compat Modes */
+	src: url("/fonts/Dirtyline 36daysoftype 2022.eot?#iefix")
+			format("embedded-opentype"),
+		url("/fonts/Dirtyline 36daysoftype 2022.woff") format("woff"),
+		/* Modern Browsers */ url("/fonts/Dirtyline 36daysoftype 2022.woff2")
+			format("woff2"),
+		/* Modern Browsers */ url("/fonts/Dirtyline 36daysoftype 2022.ttf")
+			format("truetype"); /* Safari, Android, iOS */
+	font-style: normal;
+	font-weight: normal;
+	text-rendering: optimizeLegibility;
+}
+
+.dirtyline36 {
+	font-family: "Dirtyline36Daysoftype2022" !important;
+}
+
+.exo {
+	font-family: "Exo", serif;
 }
