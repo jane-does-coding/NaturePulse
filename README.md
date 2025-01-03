@@ -1,5 +1,7 @@
 # NaturePulse
 
+<img width="1214" alt="Screenshot 2025-01-02 at 10 36 56 PM" src="https://github.com/user-attachments/assets/6469c746-cffb-4820-8026-a37684a8fca4" />
+
 ## Technologies used
 
 [![Technologies](https://skillicons.dev/icons?i=ts,tailwind,prisma,mongodb,nextjs,react,git,github)](https://skillicons.dev)
