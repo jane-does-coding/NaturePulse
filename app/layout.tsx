@@ -31,6 +31,12 @@ export default function RootLayout({
 					href="https://fonts.googleapis.com/css2?family=Creepster&family=Exo:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
 					rel="stylesheet"
 				></link>
+				<link rel="preload" href="/bg2.jpg" as="image" />
+				<link rel="preload" href="/air.png" as="image" />
+				<link rel="preload" href="/ocean.jpg" as="image" />
+				<link rel="preload" href="/forest.png" as="image" />
+				<link rel="preload" href="/desert.png" as="image" />
+				<link rel="preload" href="/waste.jpg" as="image" />
 			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-100 light`}
