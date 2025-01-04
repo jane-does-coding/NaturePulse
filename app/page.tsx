@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { useState } from "react";
@@ -23,7 +24,7 @@ export default function Home() {
 				</h1>
 			</div>
 
-			<div className="bg-gradient-to-b from-neutral-100 via-sky-100/80 via-60% to-yellow-100/50">
+			<div className="bg-gradient-to-b from-neutral-100 via-sky-100/85 via-60% to-yellow-100/80">
 				{/* Carousel */}
 				<div className="flex flex-col w-full mt-[3rem]">
 					<h1 className="dirtyline36 text-[3rem] xl:text-[5rem] 2xl:text-[7rem] mx-auto text-center text-black">
@@ -204,7 +205,7 @@ export default function Home() {
 				</div>
 
 				{/* 2 cols description */}
-				<div className="pt-[10vh]">
+				<div className="pt-[12vh]">
 					<h1 className="dirtyline36 text-[3rem] xl:text-[5rem] 2xl:text-[7rem] mx-auto text-center text-black">
 						GLobAl EcO StATs
 					</h1>
@@ -249,6 +250,8 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
+
+				<Footer />
 			</div>
 		</div>
 	);
