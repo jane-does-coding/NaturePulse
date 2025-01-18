@@ -18,7 +18,7 @@ export default function Home() {
 				/>
 				<div className="absolute top-0 left-0 w-full h-[110vh] z-[-1]  bg-gradient-to-br from-sky-800/40 to-70% to-yellow-100/20"></div>
 				<div className="absolute top-[80vh] left-0 w-full h-[30vh] z-[-1]  bg-gradient-to-b from-neutral-100/0 to-neutral-100 "></div>
-				<h1 className="dirtyline36 mt-[-10vh] text-[11rem] xl:text-[14rem] 2xl:text-[18rem] w-full text-neutral-50 font-extrabold leading-[11rem] xl:leading-[15rem] 2xl:leading-[18rem] tracking-[0] flex flex-col text-center items-center justify-center">
+				<h1 className="dirtyline36 mt-[-20vh] text-[11rem] xl:text-[14rem] 2xl:text-[18rem] w-full text-neutral-50 font-extrabold leading-[11rem] xl:leading-[15rem] 2xl:leading-[18rem] tracking-[0] flex flex-col text-center items-center justify-center">
 					<span className="mr-auto text-left w-full">NatURe</span>
 					<span className="ml-auto text-right w-full">pUlSE</span>
 				</h1>
@@ -58,7 +58,7 @@ export default function Home() {
 											insights for your region.
 										</p>
 										<a
-											href=""
+											href="/dashboard"
 											className="text-neutral-50 lowercase bg-neutral-900 mt-[1rem] px-[1.5rem] py-[0.45rem] text-[1rem] xl:text-[1.2rem] 2xl:text-[1.4rem] border-2 dirtyline36 transition-all font-light relative hover:bg-neutral-800/90 rounded-[10rem] mb-[2rem]"
 										>
 											check it out
@@ -83,7 +83,7 @@ export default function Home() {
 											awareness of global resources.
 										</p>
 										<a
-											href=""
+											href="/dashboard"
 											className="text-neutral-50 lowercase bg-neutral-900 mt-[1rem] px-[1.5rem] py-[0.45rem] text-[1rem] xl:text-[1.2rem] 2xl:text-[1.4rem] border-2 dirtyline36 transition-all font-light relative hover:bg-neutral-800/90 rounded-[10rem] mb-[2rem]"
 										>
 											check it out
@@ -108,7 +108,7 @@ export default function Home() {
 											globally.
 										</p>
 										<a
-											href=""
+											href="/dashboard"
 											className="text-neutral-50 lowercase bg-neutral-900 mt-[1rem] px-[1.5rem] py-[0.45rem] text-[1rem] xl:text-[1.2rem] 2xl:text-[1.4rem] border-2 dirtyline36 transition-all font-light relative hover:bg-neutral-800/90 rounded-[10rem] mb-[2rem]"
 										>
 											check it out
@@ -133,7 +133,7 @@ export default function Home() {
 											our planet.
 										</p>
 										<a
-											href=""
+											href="/dashboard"
 											className="text-neutral-50 lowercase bg-neutral-900 mt-[1rem] px-[1.5rem] py-[0.45rem] text-[1rem] xl:text-[1.2rem] 2xl:text-[1.4rem] border-2 dirtyline36 transition-all font-light relative hover:bg-neutral-800/90 rounded-[10rem] mb-[2rem]"
 										>
 											check it out
@@ -158,7 +158,7 @@ export default function Home() {
 											contributions.
 										</p>
 										<a
-											href=""
+											href="/dashboard"
 											className="text-neutral-50 lowercase bg-neutral-900 mt-[1rem] px-[1.5rem] py-[0.45rem] text-[1rem] xl:text-[1.2rem] 2xl:text-[1.4rem] border-2 dirtyline36 transition-all font-light relative hover:bg-neutral-800/90 rounded-[10rem] mb-[2rem]"
 										>
 											check it out

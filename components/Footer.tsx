@@ -16,7 +16,7 @@ const Footer = () => {
 				{/* Middle Section */}
 				<div className="flex flex-col md:flex-row justify-between gap-[4rem] xl:gap-[5rem] mt-6 md:mt-0">
 					<div>
-						<h3 className="text-sm font-semibold uppercase text-neutral-600 exo mb-2">
+						<h3 className="text-sm font-bold uppercase text-neutral-800 exo mb-2">
 							Often Visited
 						</h3>
 						<ul className="space-y-1 xl:space-y-2">
@@ -38,7 +38,7 @@ const Footer = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-sm font-semibold uppercase text-neutral-600 exo mb-2">
+						<h3 className="text-sm font-bold uppercase text-neutral-800 exo mb-2">
 							Useful Links
 						</h3>
 						<ul className="space-y-1 xl:space-y-2">
@@ -55,7 +55,7 @@ const Footer = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-sm font-semibold uppercase text-neutral-600 exo mb-2">
+						<h3 className="text-sm font-bold uppercase text-neutral-800 exo mb-2">
 							Social
 						</h3>
 						<ul className="space-y-1 xl:space-y-2">

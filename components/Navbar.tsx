@@ -94,7 +94,7 @@ const Navbar = () => {
 							transition={{ delay: 0.4 }}
 							className="text-neutral-800 exo text-[1.75rem] xl:text-[2rem] 2xl:text-[3rem]"
 						>
-							How to Connect
+							About
 						</motion.a>
 						<motion.a
 							href="#"
@@ -103,7 +103,7 @@ const Navbar = () => {
 							transition={{ delay: 0.6 }}
 							className="text-neutral-800 exo text-[1.75rem] xl:text-[2rem] 2xl:text-[3rem]"
 						>
-							Devices
+							View Data
 						</motion.a>
 						<motion.a
 							href="#"
@@ -112,7 +112,7 @@ const Navbar = () => {
 							transition={{ delay: 0.8 }}
 							className="text-neutral-800 exo text-[1.75rem] xl:text-[2rem] 2xl:text-[3rem]"
 						>
-							Only on Spotify
+							Mini Games
 						</motion.a>
 						<motion.a
 							href="#"
