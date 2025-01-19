@@ -1,25 +1,36 @@
 "use client";
-import React, { useState } from "react";
-import { Line, Bar } from "react-chartjs-2";
+import React, { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
 
 ChartJS.register(...registerables);
 
 type DataType = {
-	[key: string]: {
-		airQuality: number[];
-		waterLevel: number[];
-		deforestation: number[];
-		tempRise: number[];
-		wasteRate: number[];
-		text: {
-			airQuality: string;
-			waterLevel: string;
-			deforestation: string;
-			tempRise: string;
-			wasteStats: string;
-		};
-	};
+	[key: string]: any;
+};
+
+const countryApiUrls: { [key: string]: { name: string; url: string } } = {
+	US: {
+		name: "United States",
+		url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/US?unitGroup=metric&key=A3KSSCK9CC5CFTYFCD4TDTV9B&contentType=json",
+	},
+	CA: {
+		name: "Canada",
+		url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/canada?unitGroup=metric&key=A3KSSCK9CC5CFTYFCD4TDTV9B&contentType=json",
+	},
+	IN: {
+		name: "India",
+		url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/IN?unitGroup=metric&key=A3KSSCK9CC5CFTYFCD4TDTV9B&contentType=json",
+	},
+	FR: {
+		name: "France",
+		url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/FR?unitGroup=metric&key=A3KSSCK9CC5CFTYFCD4TDTV9B&contentType=json",
+	},
+	AU: {
+		name: "Australia",
+		url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/AU?unitGroup=metric&key=A3KSSCK9CC5CFTYFCD4TDTV9B&contentType=json",
+	},
+	// Add more countries as needed
 };
 
 const data: DataType = {
@@ -29,35 +40,92 @@ const data: DataType = {
 		deforestation: [12, 10, 11, 13],
 		tempRise: [1.5, 1.6, 1.7, 1.8],
 		wasteRate: [30, 35, 33, 28],
+		humidity: [0, 0, 0, 0], // Dummy data for humidity
+		solarRadiation: [0, 0, 0, 230], // Dummy data for solar radiation
+		windSpeed: [5, 6, 7, 8], // Dummy data for wind speed
 		text: {
-			airQuality: `Global AQI: 120 (Unhealthy)<br />
-                  Main Pollutant: PM2.5<br />
-                  Region: Global`,
-			waterLevel: `Reservoir Level: 75%<br />
-                  Global Water Scarcity: 20% regions<br />
-                  Conservation Tip: Reduce daily water use.`,
-			deforestation: `Annual Tree Loss: 12M hectares<br />
-                  Highest Loss: Amazon Rainforest<br />
-                  Efforts: Reforestation campaigns`,
-			tempRise: `Global Temp Rise: +1.5°C since 1900<br />
-                  CO2 Emissions: 40B tons/year<br />
-                  Transition: To renewable energy`,
-			wasteStats: `Recycling Rate: 30% globally<br />
-                  Main Issue: Single-use plastics<br />
-                  Tip: Compost and ban plastics`,
+			humidity: `Global Humidity: Average 70-80%<br />
+                Affects air quality and comfort levels.<br />
+                Tip: Use air conditioning for humidity control.`,
+			solarRadiation: `Global Solar Radiation: Average 200-230 W/m²<br />
+                Affects temperature and energy production.`,
+			windSpeed: `Global Wind Speed: Average 5-8 m/s<br />
+                Affects weather patterns and energy production.`,
 		},
 	},
 };
 
 const Page = () => {
-	const [location, setLocation] = useState<string>("");
+	const [location, setLocation] = useState<string>("US");
 	const [filteredData, setFilteredData] = useState<string>("Global");
-
-	const handleFilter = () => {
-		setFilteredData(location in data ? location : "Global");
-	};
+	const [humidityData, setHumidityData] = useState<number[]>([]);
+	const [solarRadiationData, setSolarRadiationData] = useState<number[]>([]);
+	const [windSpeedData, setWindSpeedData] = useState<number[]>([]);
+	const [cloudCoverData, setCloudCoverData] = useState<number[]>([]);
+	const [pressureData, setPressureData] = useState<number[]>([]);
+	const [timeLabels, setTimeLabels] = useState<string[]>([]);
 
 	const selectedData = data[filteredData];
+
+	// Fetch weather data from the API
+	useEffect(() => {
+		const fetchWeatherData = async () => {
+			try {
+				const countryData = countryApiUrls[location];
+				if (!countryData) {
+					throw new Error("No API URL defined for the selected country.");
+				}
+
+				const response = await fetch(countryData.url);
+
+				if (!response.ok) {
+					throw new Error("Failed to fetch data");
+				}
+
+				const data = await response.json();
+				console.log("API Response:", data);
+
+				const todayDate = new Date().toISOString().split("T")[0];
+
+				const today = data.days.find((day: any) => day.datetime === todayDate);
+
+				if (today && today.hours && Array.isArray(today.hours)) {
+					const hourlyHumidity = today.hours.map((hour: any) => hour.humidity);
+					const hourlySolarRadiation = today.hours.map(
+						(hour: any) => hour.solarradiation
+					);
+					const hourlyWindSpeed = today.hours.map(
+						(hour: any) => hour.windspeed
+					);
+					const hourlyCloudCover = today.hours.map(
+						(hour: any) => hour.cloudcover
+					);
+					const hourlyPressure = today.hours.map((hour: any) => hour.pressure);
+					const hourlyLabels = today.hours.map((hour: any) => hour.datetime);
+
+					setHumidityData(hourlyHumidity);
+					setSolarRadiationData(hourlySolarRadiation);
+					setWindSpeedData(hourlyWindSpeed);
+					setCloudCoverData(hourlyCloudCover);
+					setPressureData(hourlyPressure);
+					setTimeLabels(hourlyLabels);
+				} else {
+					throw new Error(
+						"Invalid data structure, 'hours' is missing or not an array for today's data."
+					);
+				}
+			} catch (error) {
+				console.error("Error fetching weather data:", error);
+			}
+		};
+
+		fetchWeatherData();
+	}, [location]);
+
+	const formatTime = (datetime: string) => {
+		const date = new Date(datetime);
+		return `${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
+	};
 
 	return (
 		<div className="flex w-full h-screen">
@@ -104,138 +172,154 @@ const Page = () => {
 				</h1>
 				{/* Filters */}
 				<div className="flex flex-col gap-[1rem] mb-[2rem] mt-[0.5rem]">
-					<div className="flex  border-red-400/0 w-2/3 rounded-full p-1 mx-auto shadow-md bg-gradient-to-r from-red-100 via-sky-300/75 via-40% to-yellow-100/100">
-						<input
-							type="text"
-							placeholder="Enter location"
+					<div className="flex border-red-400/0 w-2/3 rounded-full p-[5px] mx-auto shadow-md bg-gradient-to-r from-red-200 via-sky-300 via-40% to-yellow-200">
+						<select
 							value={location}
 							onChange={(e) => setLocation(e.target.value)}
 							className="w-full exo rounded-full py-[0.5rem] px-[2rem] outline-none focus:outline-none focus:ring-0 focus:border-transparent text-neutral-800 m-0 text-[1.2rem]"
-						/>
-						<button
-							onClick={handleFilter}
-							className="bg-blue-500/0 text-black py-[0rem] rounded-full px-[2rem] pl-[1.5rem] font-semibold exo m-0"
 						>
-							Apply
-						</button>
+							{Object.entries(countryApiUrls).map(([code, { name }]) => (
+								<option key={code} value={code}>
+									{name}
+								</option>
+							))}
+						</select>
 					</div>
 				</div>
 
 				{/* Cards with Descriptions and Graphs */}
 				<div className="grid grid-cols-2 gap-[1rem]">
-					{/* Air Quality Trends */}
-					<div className="w-full aspect-[5/4] bg-blue-100 border-2 border-blue-200 rounded-[0.5rem] shadow-sm p-[1rem]">
+					{/* Humidity Insights */}
+					<div className="w-full aspect-[5/4] bg-indigo-100 border-2 border-indigo-200 rounded-[0.5rem] shadow-sm p-[1rem]">
 						<h2 className="text-lg font-bold exo text-neutral-800 exo">
-							Air Quality Trends
+							Humidity Insights
 						</h2>
 						<p
 							className="text-sm text-neutral-700 mb-[1rem] exo"
-							dangerouslySetInnerHTML={{ __html: selectedData.text.airQuality }}
+							dangerouslySetInnerHTML={{ __html: selectedData.text.humidity }}
 						/>
 						<Line
 							data={{
-								labels: ["Q1", "Q2", "Q3", "Q4"],
+								labels: timeLabels.map((a) => a.slice(0, 5)),
 								datasets: [
 									{
-										label: "AQI",
-										data: selectedData.airQuality,
-										borderColor: "rgba(75,192,192,1)",
-										backgroundColor: "rgba(75,192,192,0.2)",
+										label: "Humidity (%)",
+										data:
+											humidityData.length > 0
+												? humidityData
+												: selectedData.humidity,
+										borderColor: "rgba(153, 102, 255, 1)",
+										backgroundColor: "rgba(153, 102, 255, 0.2)",
 									},
 								],
 							}}
 						/>
 					</div>
 
-					{/* Water Resources */}
-					<div className="w-full aspect-[5/4] bg-green-100 border-2 border-green-200 rounded-[0.5rem] shadow-sm p-[1rem]">
-						<h2 className="text-lg font-bold exo text-neutral-800 exo">
-							Water Resources
-						</h2>
-						<p
-							className="text-sm text-neutral-700 mb-[1rem] exo"
-							dangerouslySetInnerHTML={{ __html: selectedData.text.waterLevel }}
-						/>
-						<Bar
-							data={{
-								labels: ["Q1", "Q2", "Q3", "Q4"],
-								datasets: [
-									{
-										label: "Reservoir Levels (%)",
-										data: selectedData.waterLevel,
-										backgroundColor: "rgba(75,192,192,0.6)",
-									},
-								],
-							}}
-						/>
-					</div>
-
-					{/* Deforestation Insights */}
+					{/* Solar Radiation Insights */}
 					<div className="w-full aspect-[5/4] bg-yellow-100 border-2 border-yellow-200 rounded-[0.5rem] shadow-sm p-[1rem]">
 						<h2 className="text-lg font-bold exo text-neutral-800 exo">
-							Deforestation Insights
+							Solar Radiation Insights
 						</h2>
 						<p
 							className="text-sm text-neutral-700 mb-[1rem] exo"
 							dangerouslySetInnerHTML={{
-								__html: selectedData.text.deforestation,
+								__html: selectedData.text.solarRadiation,
 							}}
-						/>
-						<Bar
-							data={{
-								labels: ["Q1", "Q2", "Q3", "Q4"],
-								datasets: [
-									{
-										label: "Tree Loss (Mha)",
-										data: selectedData.deforestation,
-										backgroundColor: "rgba(255,205,86,0.6)",
-									},
-								],
-							}}
-						/>
-					</div>
-
-					{/* Climate Change Dashboard */}
-					<div className="w-full aspect-[5/4] bg-red-100 border-2 border-red-200 rounded-[0.5rem] shadow-sm p-[1rem]">
-						<h2 className="text-lg font-bold exo text-neutral-800 exo">
-							Climate Change Dashboard
-						</h2>
-						<p
-							className="text-sm text-neutral-700 mb-[1rem] exo"
-							dangerouslySetInnerHTML={{ __html: selectedData.text.tempRise }}
 						/>
 						<Line
 							data={{
-								labels: ["Q1", "Q2", "Q3", "Q4"],
+								labels: timeLabels.map((a) => a.slice(0, 5)),
 								datasets: [
 									{
-										label: "Temperature Rise (°C)",
-										data: selectedData.tempRise,
-										borderColor: "rgba(255,99,132,1)",
-										backgroundColor: "rgba(255,99,132,0.2)",
+										label: "Solar Radiation (W/m²)",
+										data:
+											solarRadiationData.length > 0
+												? solarRadiationData
+												: selectedData.solarRadiation,
+										borderColor: "rgba(255, 159, 64, 1)",
+										backgroundColor: "rgba(255, 159, 64, 0.2)",
 									},
 								],
 							}}
 						/>
 					</div>
 
-					{/* Waste Management Stats */}
-					<div className="w-full aspect-[5/4] bg-purple-100 border-2 border-purple-200 rounded-[0.5rem] shadow-sm p-[1rem]">
+					{/* Wind Speed Insights */}
+					<div className="w-full aspect-[5/4] bg-sky-100 border-2 border-blue-200 rounded-[0.5rem] shadow-sm p-[1rem]">
 						<h2 className="text-lg font-bold exo text-neutral-800 exo">
-							Waste Management Stats
+							Wind Speed Insights
 						</h2>
 						<p
 							className="text-sm text-neutral-700 mb-[1rem] exo"
-							dangerouslySetInnerHTML={{ __html: selectedData.text.wasteStats }}
+							dangerouslySetInnerHTML={{ __html: selectedData.text.windSpeed }}
 						/>
-						<Bar
+						<Line
 							data={{
-								labels: ["Q1", "Q2", "Q3", "Q4"],
+								labels: timeLabels.map((a) => a.slice(0, 5)),
 								datasets: [
 									{
-										label: "Recycling Rate (%)",
-										data: selectedData.wasteRate,
-										backgroundColor: "rgba(153,102,255,0.6)",
+										label: "Wind Speed (m/s)",
+										data:
+											windSpeedData.length > 0
+												? windSpeedData
+												: selectedData.windSpeed,
+										borderColor: "rgba(54, 162, 235, 1)",
+										backgroundColor: "rgba(54, 162, 235, 0.2)",
+									},
+								],
+							}}
+						/>
+					</div>
+
+					{/* Cloud Cover */}
+					<div className="w-full aspect-[5/4] bg-slate-100 border-2 border-gray-200 rounded-[0.5rem] shadow-sm p-[1rem]">
+						<h2 className="text-lg font-bold text-neutral-800">
+							Cloud Cover Insights
+						</h2>
+						<p
+							className="text-sm mb-[1rem] text-neutral-700"
+							dangerouslySetInnerHTML={{ __html: selectedData.text.cloudCover }}
+						/>
+						<Line
+							data={{
+								labels: timeLabels.map((a) => a.slice(0, 5)),
+								datasets: [
+									{
+										label: "Cloud Cover (%)",
+										data:
+											cloudCoverData.length > 0
+												? cloudCoverData
+												: selectedData.cloudCover,
+										borderColor: "rgba(75, 192, 192, 1)",
+										backgroundColor: "rgba(75, 192, 192, 0.2)",
+									},
+								],
+							}}
+						/>
+					</div>
+
+					{/* Pressure */}
+					<div className="w-full aspect-[5/4] bg-green-100/80 border-2 border-green-200 rounded-[0.5rem] shadow-sm p-[1rem]">
+						<h2 className="text-lg font-bold text-neutral-800 exo">
+							Pressure Insights
+						</h2>
+						<p
+							className="text-sm text-neutral-700 mb-[1rem] exo"
+							dangerouslySetInnerHTML={{ __html: selectedData.text.pressure }}
+						/>
+						<Line
+							data={{
+								labels: timeLabels.map((a) => a.slice(0, 5)),
+								datasets: [
+									{
+										label: "Pressure (hPa)",
+										data:
+											pressureData.length > 0
+												? pressureData
+												: selectedData.pressure,
+										borderColor: "rgba(255, 99, 132, 1)",
+										backgroundColor: "rgba(255, 99, 132, 0.2)",
 									},
 								],
 							}}
