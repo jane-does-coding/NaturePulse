@@ -85,6 +85,7 @@ Follow these steps to set up and run the project on your local machine:
 
 ## Project Structure
 
+```
 NaturePulse/
 ├── app/
 │ ├── page.js # Homepage component
@@ -100,3 +101,4 @@ NaturePulse/
 ├── .env # Environment variables
 ├── package.json # Project dependencies
 └── README.md # Project documentation
+```
