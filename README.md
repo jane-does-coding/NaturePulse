@@ -8,15 +8,7 @@
 
 ## Technologies Used
 
-[![Technologies](https://skillicons.dev/icons?i=ts,tailwind,prisma,mongodb,nextjs,react,git,github)](https://skillicons.dev)
-
-- **TypeScript**: For type-safe and scalable code.
-- **Tailwind CSS**: For utility-first, responsive styling.
-- **Prisma**: For database modeling and management.
-- **MongoDB**: For flexible and scalable data storage.
-- **Next.js**: For server-side rendering and optimized performance.
-- **React**: For building interactive user interfaces.
-- **Git & GitHub**: For version control and collaboration.
+[![Technologies](https://skillicons.dev/icons?i=html,css,ts,tailwind,nextjs,react,git,github)](https://skillicons.dev)
 
 ---
 
@@ -90,6 +82,8 @@ Follow these steps to set up and run the project on your local machine:
    ```bash
    git clone https://github.com/jane-does-coding/NaturePulse
    ```
+
+## Project Structure
 
 NaturePulse/
 ├── app/
