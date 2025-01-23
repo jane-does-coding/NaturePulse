@@ -82,30 +82,6 @@
 
 ---
 
-## Functionality
-
-### **Carousel**
-
-- The carousel allows users to navigate through different environmental topics.
-- Each step includes an image, a title, a description, and a call-to-action button.
-- Smooth animations are implemented using Framer Motion.
-
-### **Two-Column Sections**
-
-- Reusable components for displaying content in a two-column layout.
-- Each column includes an image, a heading, a description, and an optional link.
-
-### **Marquee**
-
-- A scrolling marquee displays a repeated message to grab attention.
-- Built using the `react-fast-marquee` library.
-
-### **Responsive Design**
-
-- The layout adapts seamlessly to different screen sizes using Tailwind CSS.
-
----
-
 ## Run Locally
 
 Follow these steps to set up and run the project on your local machine:
@@ -114,3 +90,19 @@ Follow these steps to set up and run the project on your local machine:
    ```bash
    git clone https://github.com/jane-does-coding/NaturePulse
    ```
+
+NaturePulse/
+├── app/
+│ ├── page.js # Homepage component
+│ └── layout.js # Root layout
+├── components/
+│ ├── Carousel.js # Carousel component
+│ ├── TwoColumnSection.js # Two-column layout component
+│ ├── Navbar.js # Navigation bar
+│ └── Footer.js # Footer component
+├── public/ # Static assets (images, etc.)
+├── prisma/ # Prisma schema and migrations
+├── styles/ # Custom styles (if any)
+├── .env # Environment variables
+├── package.json # Project dependencies
+└── README.md # Project documentation
