@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
+import Sidebar from "@/components/Sidebar";
 
 ChartJS.register(...registerables);
 
@@ -30,7 +31,6 @@ const countryApiUrls: { [key: string]: { name: string; url: string } } = {
 		name: "Australia",
 		url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/AU?unitGroup=metric&key=A3KSSCK9CC5CFTYFCD4TDTV9B&contentType=json",
 	},
-	// Add more countries as needed
 };
 
 const data: DataType = {
@@ -40,9 +40,7 @@ const data: DataType = {
 		deforestation: [12, 10, 11, 13],
 		tempRise: [1.5, 1.6, 1.7, 1.8],
 		wasteRate: [30, 35, 33, 28],
-		humidity: [0, 0, 0, 0], // Dummy data for humidity
-		solarRadiation: [0, 0, 0, 230], // Dummy data for solar radiation
-		windSpeed: [5, 6, 7, 8], // Dummy data for wind speed
+
 		text: {
 			humidity: `Global Humidity: Average 70-80%<br />
                 Affects air quality and comfort levels.<br />
@@ -67,7 +65,6 @@ const Page = () => {
 
 	const selectedData = data[filteredData];
 
-	// Fetch weather data from the API
 	useEffect(() => {
 		const fetchWeatherData = async () => {
 			try {
@@ -130,40 +127,7 @@ const Page = () => {
 	return (
 		<div className="flex w-full h-screen">
 			{/* Sidebar */}
-			<div className="w-[25vw] border-[2px] border-neutral-200 shadow-lg h-screen fixed left-0 top-0">
-				<div className="flex flex-col gap-[0.75rem] xl:gap-[1rem] pt-[2rem] pl-[1.5rem] xl:pl-[2.25rem]">
-					<a
-						href="/"
-						className="text-neutral-800 text-[1.25rem] xl:text-[1.5rem] exo"
-					>
-						Home
-					</a>
-					<a
-						href="/about"
-						className="text-neutral-800 text-[1.25rem] xl:text-[1.5rem] exo"
-					>
-						About
-					</a>
-					<a
-						href="/dashboard"
-						className="text-neutral-800 text-[1.25rem] xl:text-[1.5rem] exo"
-					>
-						View Data
-					</a>
-					<a
-						href="/mini-games"
-						className="text-neutral-800 text-[1.25rem] xl:text-[1.5rem] exo"
-					>
-						Mini Games
-					</a>
-					<a
-						href="/"
-						className="text-neutral-800 text-[1.25rem] xl:text-[1.5rem] exo"
-					>
-						Desktop App
-					</a>
-				</div>
-			</div>
+			<Sidebar />
 
 			{/* Content */}
 			<div className="ml-[25vw] w-[75vw] p-[1.5rem] xl:p-[3rem] xl:pt-[2rem]">

@@ -23,6 +23,7 @@ const MemoryGame = () => {
 	const [flippedCards, setFlippedCards] = useState<number[]>([]);
 	const [timer, setTimer] = useState(0);
 	const [gameStarted, setGameStarted] = useState(false);
+	const [gameOver, setGameOver] = useState(false);
 
 	useEffect(() => {
 		initializeGame();
@@ -30,13 +31,13 @@ const MemoryGame = () => {
 
 	useEffect(() => {
 		let interval: NodeJS.Timeout | null = null;
-		if (gameStarted) {
+		if (gameStarted && !gameOver) {
 			interval = setInterval(() => setTimer((prev) => prev + 1), 1000);
 		}
 		return () => {
 			if (interval) clearInterval(interval);
 		};
-	}, [gameStarted]);
+	}, [gameStarted, gameOver]);
 
 	const initializeGame = () => {
 		const shuffledCards = [...natureCards, ...natureCards]
@@ -46,12 +47,13 @@ const MemoryGame = () => {
 		setFlippedCards([]);
 		setTimer(0);
 		setGameStarted(false);
+		setGameOver(false);
 	};
 
 	const handleCardClick = (id: number) => {
 		if (!gameStarted) setGameStarted(true);
 
-		if (flippedCards.length === 2) return;
+		if (flippedCards.length === 2 || cards[id].matched) return;
 
 		const newFlippedCards = [...flippedCards, id];
 		setFlippedCards(newFlippedCards);
@@ -71,6 +73,12 @@ const MemoryGame = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (cards.length > 0 && cards.every((card) => card.matched)) {
+			setGameOver(true);
+		}
+	}, [cards]);
+
 	const allMatched = cards.every((card) => card.matched);
 
 	return (
@@ -85,10 +93,10 @@ const MemoryGame = () => {
 				{cards.map((card) => (
 					<div
 						key={card.id}
-						className={` flex items-center justify-center border-2 rounded-md text-lg font-semibold cursor-pointer text-neutral-800 exo w-[7rem] xl:w-[8rem] 2xl:w-[9rem] h-[7rem] xl:h-[8rem] 2xl:h-[9rem] shadow-sm ${
+						className={`flex items-center justify-center border-2 rounded-md text-lg font-semibold cursor-pointer text-neutral-800 exo w-[7rem] xl:w-[8rem] 2xl:w-[9rem] h-[7rem] xl:h-[8rem] 2xl:h-[9rem] shadow-sm transition-all duration-200 ${
 							flippedCards.includes(card.id) || card.matched
 								? "bg-neutral-500/10 border-neutral-300"
-								: "bg-white"
+								: "bg-white hover:bg-neutral-50 hover:shadow-md"
 						}`}
 						onClick={() => handleCardClick(card.id)}
 					>
@@ -99,7 +107,7 @@ const MemoryGame = () => {
 				))}
 			</div>
 			{allMatched && (
-				<div className="mt-6 text-xl font-bold text-neutral-700">
+				<div className="mt-6 text-xl font-bold text-neutral-700 bg-white/80 px-6 py-3 rounded-lg shadow-lg">
 					🎉 Congratulations! You matched all the cards in{" "}
 					{Math.floor(timer / 60)}:{String(timer % 60).padStart(2, "0")}{" "}
 					minutes! 🎉
@@ -107,7 +115,7 @@ const MemoryGame = () => {
 			)}
 			<button
 				onClick={initializeGame}
-				className="mt-4 px-6 py-2 bg-neutral-600 text-white font-medium rounded-md shadow-md hover:bg-neutral-700"
+				className="mt-6 px-6 py-2 bg-neutral-600 text-white font-medium rounded-md shadow-md hover:bg-neutral-700 transition-all"
 			>
 				Restart Game
 			</button>
