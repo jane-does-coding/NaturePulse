@@ -6,7 +6,7 @@ const fadeInVariants = {
 	visible: { opacity: 1, y: 0 },
 };
 
-export default function TwoColumnSection({ title, items }: any) {
+export default function TwoColumnSection({ title, items, circle }: any) {
 	return (
 		<div className="pt-[12vh]">
 			<motion.h1
@@ -32,7 +32,9 @@ export default function TwoColumnSection({ title, items }: any) {
 					>
 						<img
 							src={item.image}
-							className="rounded-[0.5rem] w-[30vw] aspect-[1] object-cover"
+							className={` w-[30vw] aspect-[1] object-cover ${
+								circle ? "rounded-full" : "rounded-[0.5rem]"
+							}`}
 							alt=""
 						/>
 						<h2 className="text-neutral-900 font-normal text-[1.75rem] xl:text-[2rem] exo tracking-[-2px] mt-[1.5rem]">

@@ -79,7 +79,7 @@ const Navbar = () => {
 					<div className="w-1/2"></div>
 					<div className="w-1/2 flex flex-col gap-[0.75rem] pt-[10vh]">
 						<motion.a
-							href="#"
+							href="/"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: isMenuOpen ? 1 : 0 }}
 							transition={{ delay: 0.2 }}
@@ -88,16 +88,7 @@ const Navbar = () => {
 							Home
 						</motion.a>
 						<motion.a
-							href="#"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: isMenuOpen ? 1 : 0 }}
-							transition={{ delay: 0.4 }}
-							className="text-neutral-800 exo text-[1.75rem] xl:text-[2rem] 2xl:text-[3rem]"
-						>
-							About
-						</motion.a>
-						<motion.a
-							href="#"
+							href="/dashboard"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: isMenuOpen ? 1 : 0 }}
 							transition={{ delay: 0.6 }}
@@ -106,7 +97,7 @@ const Navbar = () => {
 							View Data
 						</motion.a>
 						<motion.a
-							href="#"
+							href="/mini-games"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: isMenuOpen ? 1 : 0 }}
 							transition={{ delay: 0.8 }}
@@ -115,13 +106,13 @@ const Navbar = () => {
 							Mini Games
 						</motion.a>
 						<motion.a
-							href="#"
+							href="/articles"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: isMenuOpen ? 1 : 0 }}
 							transition={{ delay: 1.0 }}
 							className="text-neutral-800 exo text-[1.75rem] xl:text-[2rem] 2xl:text-[3rem]"
 						>
-							Desktop App
+							Articles
 						</motion.a>
 					</div>
 				</div>

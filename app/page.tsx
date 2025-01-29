@@ -13,16 +13,18 @@ export default function Home() {
 		{
 			image: "/globe.jpg",
 			heading: "Real-Time Eco Data",
-			description: "Access live environmental metrics from around the globe.",
+			description:
+				"Monitor live environmental metrics like air quality, deforestation rates, and carbon emissions.",
 			link: "/dashboard",
-			linkText: "View Live Data",
+			linkText: "Explore Data",
 		},
 		{
 			image: "/laptop.jpg",
 			heading: "Engaging Mini-Games",
-			description: "Learn and act through fun, interactive challenges.",
+			description:
+				"Play games that teach you about recycling, renewable energy, and wildlife conservation.",
 			link: "/games",
-			linkText: "Try a Game",
+			linkText: "Play Now",
 		},
 	];
 
@@ -31,28 +33,31 @@ export default function Home() {
 			image: "/air.png",
 			heading: "Expert Team",
 			description:
-				"Our team of experts is dedicated to providing accurate and up-to-date environmental data.",
+				"Our team includes environmental scientists, data analysts, and educators committed to driving change.",
 		},
 		{
 			image: "/air.png",
 			heading: "Real Impact",
 			description:
-				"We empower individuals and organizations to make a tangible difference in the world.",
+				"We provide tools and resources that help you take meaningful action for the planet.",
 		},
 	];
 
 	const testimonialsItems = [
 		{
-			image: "/air.png",
-			heading: "Jane Doe",
-			description:
-				"NaturePulse has transformed how I understand and interact with the environment. Highly recommend!",
+			image: "/info1.jpg",
+			heading: "Understand Better",
+			description: "",
 		},
 		{
-			image: "/air.png",
-			heading: "John Smith",
-			description:
-				"The mini-games are not only fun but also incredibly educational. Great job!",
+			image: "/info2.jpg",
+			heading: "Learn to take Action",
+			description: "",
+		},
+		{
+			image: "/info3.jpg",
+			heading: "Spread Awarness",
+			description: "",
 		},
 	];
 
@@ -81,19 +86,22 @@ export default function Home() {
 					speed={50}
 				>
 					<h2 className="dirtyline36 text-neutral-900 text-[1.5rem] xl:text-[2rem] 2xl:text-[2.25rem] mx-8">
-						ExPLOre ThE KnoWledGe
+						JoIn tHE MOVemeEN
 					</h2>
 					<h2 className="dirtyline36 text-neutral-900 text-[1.5rem] xl:text-[2rem] 2xl:text-[2.25rem] mx-8">
-						ExPLOre ThE KnoWledGe
+						TraCK THe PULse
 					</h2>
 					<h2 className="dirtyline36 text-neutral-900 text-[1.5rem] xl:text-[2rem] 2xl:text-[2.25rem] mx-8">
-						ExPLOre ThE KnoWledGe
+						AcT foR tHE FuTUrE
 					</h2>
 					<h2 className="dirtyline36 text-neutral-900 text-[1.5rem] xl:text-[2rem] 2xl:text-[2.25rem] mx-8">
-						ExPLOre ThE KnoWledGe
+						JoIn tHE MOVemeEN
 					</h2>
 					<h2 className="dirtyline36 text-neutral-900 text-[1.5rem] xl:text-[2rem] 2xl:text-[2.25rem] mx-8">
-						ExPLOre ThE KnoWledGe
+						TraCK THe PULse
+					</h2>
+					<h2 className="dirtyline36 text-neutral-900 text-[1.5rem] xl:text-[2rem] 2xl:text-[2.25rem] mx-8">
+						AcT foR tHE FuTUrE
 					</h2>
 				</Marquee>
 
@@ -101,8 +109,13 @@ export default function Home() {
 					title="GLobAl EcO StATs"
 					items={globalEcoStatsItems}
 				/>
-				<TwoColumnSection title="Why Choose Us" items={whyChooseUsItems} />
-				<TwoColumnSection title="What People Say" items={testimonialsItems} />
+				<TwoColumnSection
+					circle
+					title="WhY iS It ImpORtaNt"
+					items={testimonialsItems}
+				/>
+				<br />
+				<br />
 
 				<Footer />
 			</div>

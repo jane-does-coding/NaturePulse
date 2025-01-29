@@ -60,22 +60,34 @@ const Footer = () => {
 						</h3>
 						<ul className="space-y-1 xl:space-y-2">
 							<li>
-								<a href="#" className="text-neutral-800 exo">
+								<a
+									href="https://github.com/jane-does-coding/NaturePulse"
+									className="text-neutral-800 exo"
+								>
 									Gihub
 								</a>
 							</li>
 							<li>
-								<a href="#" className="text-neutral-800 exo">
+								<a
+									href="https://devpost.com/I-am-jane"
+									className="text-neutral-800 exo"
+								>
 									Devpost
 								</a>
 							</li>
 							<li>
-								<a href="#" className="text-neutral-800 exo">
+								<a
+									href="https://www.linkedin.com/in/yevheniia-simaka/"
+									className="text-neutral-800 exo"
+								>
 									Linkedin
 								</a>
 							</li>
 							<li>
-								<a href="#" className="text-neutral-800 exo">
+								<a
+									href="https://dribbble.com/jane-does-coding"
+									className="text-neutral-800 exo"
+								>
 									Dribbble
 								</a>
 							</li>

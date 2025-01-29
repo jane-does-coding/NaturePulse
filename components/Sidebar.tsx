@@ -12,12 +12,12 @@ const Sidebar = () => {
 				>
 					Home
 				</Link>
-				<Link
+				{/* <Link
 					href="/about"
 					className="text-neutral-800 text-[1.25rem] xl:text-[1.5rem] exo"
 				>
 					About
-				</Link>
+				</Link> */}
 				<Link
 					href="/dashboard"
 					className="text-neutral-800 text-[1.25rem] xl:text-[1.5rem] exo"
