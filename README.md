@@ -82,23 +82,3 @@ Follow these steps to set up and run the project on your local machine:
    ```bash
    git clone https://github.com/jane-does-coding/NaturePulse
    ```
-
-## Project Structure
-
-```
-NaturePulse/
-├── app/
-│ ├── page.js # Homepage component
-│ └── layout.js # Root layout
-├── components/
-│ ├── Carousel.js # Carousel component
-│ ├── TwoColumnSection.js # Two-column layout component
-│ ├── Navbar.js # Navigation bar
-│ └── Footer.js # Footer component
-├── public/ # Static assets (images, etc.)
-├── prisma/ # Prisma schema and migrations
-├── styles/ # Custom styles (if any)
-├── .env # Environment variables
-├── package.json # Project dependencies
-└── README.md # Project documentation
-```
